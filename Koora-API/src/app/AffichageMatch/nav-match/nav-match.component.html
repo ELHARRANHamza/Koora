@@ -1,0 +1,66 @@
+<div class="team-holder theme-padding">
+    <div class="container">
+       <div class="main-heading-holder">
+          <div class="main-heading sytle-2">
+             <h2>About The Matches</h2>
+             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium<br>doloremque laudantium, totam rem aperiam</p>
+          </div>
+       </div>
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active text-uppercase" id="contact-tab" data-toggle="tab"
+                            href="#teams" role="tab" aria-controls="teams"
+                            aria-selected="false">Teams</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" id="contact-tab" data-toggle="tab"
+                            href="#matchPlay" role="tab" aria-controls="teams"
+                            aria-selected="false">Match Play Now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" id="contact-tab" data-toggle="tab"
+                            href="#matchFinish" role="tab" aria-controls="matchFinish"
+                            aria-selected="false">Match Finish</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-uppercase" id="matchNot-tab" data-toggle="tab"
+                            href="#matchNot" role="tab" aria-controls="matchNot" aria-selected="true">Match
+                            not Play</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade" id="matchNot" role="tabpanel" aria-labelledby="matchNot-tab">
+                       <app-match-not-play></app-match-not-play>
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel"
+                        aria-labelledby="profile-tab">
+                       
+                    </div>
+                    <div class="tab-pane fade" id="matchPlay" role="tabpanel"
+                    aria-labelledby="profile-tab">
+                   <app-match-now></app-match-now>
+                </div>
+                <div class="tab-pane fade" id="matchFinish" role="tabpanel"
+                aria-labelledby="profile-tab">
+               <app-finish-match></app-finish-match>
+            </div>
+                    <div class="tab-pane fade show active" id="teams" role="tabpanel"
+                        aria-labelledby="teams-tab">
+                       <app-point-teams></app-point-teams>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+   
+
+</div>
+
+    </div>
+
+

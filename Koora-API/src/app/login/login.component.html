@@ -1,0 +1,39 @@
+<div class="container" style="position: relative; top: 100px;margin-bottom: 300px;">
+    <h5 style="padding-top: 100px;">Login</h5>
+    <hr class="mb-4" />
+    <div class="login-container">
+        <div class="col-md-8">
+            <form [formGroup]= "fg">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input  formControlName="userName" class="form-control" id="userName"
+                        placeholder="userName" [ngClass]="{'is-invalid': fg.get('userName').invalid && fg.get('userName').touched}">
+                     <div class="text-danger"
+                        *ngIf="this.fg.get('userName').invalid && this.fg.get('userName').touched">
+                        {{messageValidate.userName.required}}
+                    </div>
+                </div>
+               <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control" id="password"
+                        placeholder="Password" [ngClass]="{'is-invalid': fg.get('password').invalid && fg.get('password').touched}">
+                     <div class="text-danger"
+                        *ngIf="this.fg.get('password').invalid && this.fg.get('password').touched">
+                        <div class="text-danger" *ngIf="this.fg.get('password').errors.required">
+                            {{messageValidate.pass.required}}
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="pr-2" for="remember">Remember me</label>
+                    <input type="checkbox" formControlName="rememberMe" id="remember">
+                    
+                </div>
+                <button type="submit" class="btn btn-primary" (click)='login()'>Login</button>
+            </form>
+        </div>
+    </div>
+    <div class="btn-login mt-3">
+          I dont Have Account <a routerLink='/registre' class="">Registre</a>
+    </div>
+</div>

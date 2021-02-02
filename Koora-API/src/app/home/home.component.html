@@ -1,0 +1,197 @@
+<div class="matchs-info">
+    <div class="col-md-6 col-sm-6 col-xs-12">
+       <div class="row">
+          <div class="full">
+             <div class="matchs-vs">
+                <div class="vs-team">
+                   <div class="team-btw-match">
+                      <ul>
+                         <li>
+                            <img src="../assets/images/images/img-03.png" alt="">
+                            <span>Footbal Team</span>
+                         </li>
+                         <li class="vs"><span>vs</span></li>
+                         <li>
+                            <img src="../assets/images/images/img-04.png" alt="">
+                            <span>Super Team Club</span>
+                         </li>
+                      </ul>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-xs-12">
+       <div class="row">
+          <div class="full">
+             <div class="right-match-time">
+                <h2>Next Match</h2>
+                <ul id="countdown-1" class="countdown">
+                   <li><span class="days">10 </span>Day </li>
+                   <li><span class="hours">5 </span>Hours </li>
+                   <li><span class="minutes">25 </span>Minutes </li>
+                   <li><span class="seconds">10 </span>Seconds </li>
+                </ul>
+                <span>12/02/2017 /19:00pm</span>
+             </div>
+          </div>
+       </div>
+    </div>
+ </div>
+ <section id="contant" class="contant">
+    <div class="container">
+       <div class="row">
+          <div class="col-lg-4 col-sm-4 col-xs-12">
+             <aside id="sidebar" class="left-bar">
+                <div class="banner-sidebar">
+                   <img class="img-responsive" src="../assets/images/images/img-05.jpg" alt="#" />
+                   <h3>Lorem Ipsum is simply dummy text..</h3>
+                </div>
+             </aside>
+             <div *ngIf="serviceMatch.affichagematchNotPlay.length === 0">
+               <h4>Match Fixture</h4>
+               <aside id="sidebar" class="left-bar">
+                  <div class="feature-matchs">
+                     <div class="team-btw-match">
+                        <div *ngFor='let ch of serviceMatch.affichagematchNotPlay'>
+                          <ul *ngFor='let match of ch.matches'>
+                             <li>
+                                <img src="{{getImageTeam(match.team_Aller.logo)}}" class="imgTeam" alt="">
+                                <span>{{match.team_Aller.nom}}</span>
+                             </li>
+                             <li class="vs"><span>vs</span></li>
+                             <li>
+                                <img src="{{getImageTeam(match.team_Retour.logo)}}" class="imgTeam" alt="">
+                                <span>{{match.team_Retour.nom}}</span>
+                             </li>
+                          </ul>
+                        </div>
+                     </div>
+                  </div>
+               </aside>
+             </div>
+            
+             <h4>Points Table</h4>
+             <aside id="sidebar" class="left-bar">
+                <div class="feature-matchs" *ngFor='let ch of serviceTeams.champions'>
+                   <h1 class="alert alert-info">{{ch.name}} <img src="{{getImageChampion(ch.image)}}" alt="" class="imgTeam"></h1>
+                   <table class="table table-bordered table-hover">
+                      <thead>
+                         <tr>
+                            <th>#</th>
+                            <th>Team</th>
+                            <th>P</th>
+                            <th>M</th>
+                            <th>W</th>
+                            <th>L</th>
+                            <th>B</th>
+                         </tr>
+                      </thead>
+                      <tbody>
+                         <tr *ngFor='let teams of ch.teams;let cp = index'>
+                            <td>
+                               {{cp+1}}
+                            </td>
+                            <td><img src="{{getImageTeam(teams.team.logo)}}" alt="" style="width: 30px;height: 30px;border-radius: 50%;">{{teams.team.nom}}</td>
+                            <td>{{teams.point}}</td>
+                            <td>{{teams.nbMatch}}</td>
+                            <td>{{teams.nbMatchW}}</td>
+                            <td>{{teams.nbMatchL}}</td>
+                            <td>{{teams.nbMatchB}}</td>
+                         </tr>
+                      </tbody>
+                   </table>
+                   <br>
+                </div>
+             </aside>
+             <div class="content-widget top-story" style="background: url(images/top-story-bg.jpg);">
+                <div class="top-stroy-header">
+                   <h2>Match Play Now <a class="fa fa-fa fa-angle-right"></a></h2>
+                   <span class="date">{{date | date}}</span>
+                </div>
+                <div *ngFor='let ch of serviceMatch.affichagematchPlay'>
+                <div class="top-stroy-header">
+                  <h2>{{ch.name}} <img src="{{getImageChampion(ch.image)}}" alt="" class="imgTeam"> </h2>
+                </div>
+                <ul class="other-stroies" *ngIf='ch.matches.length <= 0'>
+                  <li><a>Any Match</a></li>
+               </ul>
+                
+                <ul class="other-stroies" *ngFor='let match of ch.matches'>
+                   <li><a><img src="{{getImageTeam(match.team_Aller.logo)}}" class="imgTeam" alt="">{{match.team_Aller.nom}} {{match.res_TeamAller}} {{match.res_TeamRetour}} {{match.team_Retour.nom}} <img src="{{getImageTeam(match.team_Retour.logo)}}" class="imgTeam" alt=""></a></li>
+                </ul>
+               </div>
+             </div>
+          </div>
+          <div class="col-lg-8 col-sm-8 col-xs-12">
+             <div class="news-post-holder" *ngFor='let item of service.news'>
+                <div class="news-post-widget">
+                   <img class="img-responsive" src="{{getImage(item.image)}}" alt="">
+                   <div class="news-post-detail">
+                      <span class="date">{{item.date_Publiciter | date}}</span>
+                      <h2><a href="blog-detail.html">{{item.titre}}</a></h2>
+                      <p>{{item.description.substring(0,100)}}</p>
+                      <div class="full">
+                        <a class="btn" routerLink='/more/{{item.id}}'>Read More</a>
+                     </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <section>
+    <div class="container">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="full">
+                <div class="main-heading sytle-2">
+                   <h2>Video</h2>
+                   <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium<br>doloremque laudantium, totam rem aperiam</p>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <section class="video_section_main theme-padding middle-bg vedio">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="full">
+                <div class="match_vedio">
+                   <img class="img-responsive" src="../assets/images/images/img-07.jpg" alt="#" />
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
+ <div class="team-holder theme-padding">
+    <div class="container">
+       <div class="main-heading-holder">
+          <div class="main-heading sytle-2">
+             <h2>The Best SharpShooter</h2>
+             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium<br>doloremque laudantium, totam rem aperiam</p>
+          </div>
+       </div>
+       <div id="team-slider">
+          <div class="container">
+             <div class="col-md-3" *ngFor="let player of service.players">
+                <div class="team-column style-2">
+                   <img src="{{getImagePlayers(player.image)}}" alt="" style="width: 268px;height: 368px;">
+                   <div class="player-name">
+                      <div class="desination-2">{{player.poste}}</div>
+                      <h5>{{player.firstname}} {{player.lastName}}</h5>
+                      <span class="player-number">{{player.nombre}}</span>
+                   </div>
+                 
+                </div>
+             </div>
+            
+          </div>
+       </div>
+    </div>
+ </div>

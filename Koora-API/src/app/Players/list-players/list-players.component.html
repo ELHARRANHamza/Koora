@@ -1,0 +1,117 @@
+
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Liste All Players</h5>
+                
+                <span class="d-block mt-2">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-outline-primary" (click)='loadData()' data-toggle="modal" data-target="#modelId">
+                    <i class="fa fa-pencil"></i> Create
+                </button>
+            </span>
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" *ngIf="service.player.id === 0">Add New Team</h5>
+                                <h5 class="modal-title" *ngIf="service.player.id !== 0">Edit Team</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <div class="modal-body" style="overflow: auto; height: 500px;">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert" *ngIf="message !==''">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  <strong>{{message}}</strong> 
+                                </div>
+                                
+                                <script>
+                                  $(".alert").alert();
+                                </script>
+                              <app-add-players></app-add-players>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" *ngIf="service.player.id === 0"
+                                 (click)='Add()'
+                                [disabled]="service.fg.invalid"><i class="fas fa-save"></i> Save</button>
+                                <button type="button" class="btn btn-info" (click)="Edit()"
+                                 *ngIf="service.player.id !== 0"
+                                 [disabled]="service.fg.invalid"><i class="fas fa-save"></i>Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-body table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                 <th>About</th>
+                                <th>Date</th>
+                                <th>Nationality</th>
+                                <th>Image</th>
+                                <th>Mettre a jour</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let item of service.listPlayers'>
+                                <td>{{item.firstname}}</td>
+                                <td>{{item.lastName}}</td>
+                                <td>{{item.about.substring(0,30)}}</td>
+                                <td>{{item.date_Nais | date: 'dd/MM/yyyy'}}</td>
+                                <td>{{item.nationality}}</td>
+                                <td>
+                                    <img src="{{getImage(item.image)}}" style="width: 50px;height: 50px; border-radius: 50%;" alt="">
+                                </td>
+                                <td><button type="button" (click)='select(item)' class="btn btn-icon btn-outline-warning has-ripple" data-toggle="modal" data-target="#modelId"><span class="fa fa-edit"></span></button>
+                                 | <button type="button" (click)='select(item)' class="btn btn-icon btn-outline-danger" data-toggle="modal" data-target="#modelDelete"><i class="fa fa-trash-o"></i></button></td>
+
+                                                         <!-- Modal Delete -->
+                <div class="modal fade" id="modelDelete" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Question</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-Success alert-dismissible fade show" role="alert" *ngIf="message !== ''">
+                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                  <strong>{{message}}</strong> 
+                                </div>
+                                
+                                <script>
+                                  $(".alert").alert();
+                                </script>
+                                do you want delete this Players "{{service.fg.get('firstname').value}} {{service.fg.get('lastName').value}}"
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-danger" (click)='Delete()'>Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

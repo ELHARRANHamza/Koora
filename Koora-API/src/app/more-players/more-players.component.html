@@ -1,0 +1,27 @@
+<section id="contant" class="contant main-heading" style="padding-bottom:0;margin-bottom:-1px;position:relative;z-index:1;">
+    <div class="dark-section" style="background:url(../assets/images/images/walle.jpg)">
+        <div class="container">
+           <div class="row">
+              <div class="col-md-12 col-sm-12">
+                 <div class="heading-main">
+                    <h2>Our Players</h2>
+                 </div>
+              </div>
+           </div>
+           <br>
+           <br>
+           <div class="row">
+            <div class="col-md-3" *ngFor="let player of service.listPlayers">
+                <div class="team-column style-2">
+                   <img src="{{getImage(player.image)}}" style="width: 268px;height: 368px;" alt="">
+                   <div class="player-name">
+                      <div class="desination-2">{{player.poste}}</div>
+                      <h5>{{player.firstname}} {{player.lastName}}</h5>
+                      <span class="player-number">{{player.nombre}}</span>
+                   </div>
+                </div>
+             </div>
+           </div>
+        </div>
+     </div>
+</section>

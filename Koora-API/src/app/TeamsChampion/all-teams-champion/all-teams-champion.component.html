@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Liste All Teams In This Champion</h5>
+
+                <span class="d-block mt-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-primary" (click)='loadData()' data-toggle="modal"
+                        data-target="#modelId">
+                        <i class="fa fa-pencil"></i> Create
+                    </button>
+                </span>
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" *ngIf="service.teamChampion.id === 0">Add New Team In This Champion</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                    *ngIf="message !==''">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>{{message}}</strong>
+                                </div>
+
+                                <script>
+                                    $(".alert").alert();
+                                </script>
+                                <app-add-teams-champion></app-add-teams-champion>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" *ngIf="service.teamChampion.id === 0"
+                                    (click)='Add()' [disabled]='service.fg.invalid'><i class="fas fa-save"></i>
+                                    Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="card-body table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Teams</th>
+                                <th>Image</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let item of service.teamsChampions'>
+                                <td>{{item.team.nom}}</td>
+                                <td>
+                                    <img src="{{getImage(item.team.logo)}}" style="width: 60px;height: 60px; border-radius: 50%;" alt="">
+                                </td>
+                                <td>
+                                    <button type="button" (click)='select(item)'
+                                        class="btn btn-icon btn-outline-danger" data-toggle="modal"
+                                        data-target="#modelDelete"><i class="fa fa-trash-o"></i></button></td>
+
+                                <!-- Modal Delete -->
+                                <div class="modal fade" id="modelDelete" tabindex="-1" role="dialog"
+                                    aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Question</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="alert alert-Success alert-dismissible fade show"
+                                                    role="alert" *ngIf="message !== ''">
+                                                    <button type="button" class="close" data-dismiss="alert"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <strong>{{message}}</strong>
+                                                </div>
+
+                                                <script>
+                                                    $(".alert").alert();
+                                                </script>
+                                                do you want delete this Teams "{{item.team.nom}}"
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-danger"
+                                                    (click)='Delete()'>Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

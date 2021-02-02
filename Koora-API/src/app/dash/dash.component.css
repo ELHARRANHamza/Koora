@@ -1,0 +1,4 @@
+@import '~dashBoard/assets/css/style.css';
+tr :hover{
+cursor: pointer;
+}

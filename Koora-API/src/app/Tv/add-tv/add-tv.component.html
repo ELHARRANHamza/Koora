@@ -1,0 +1,27 @@
+<form [formGroup]='service.fg'>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" formControlName='nom' id="name" class="form-control"
+        [ngClass]="{'is-invalid': this.service.fg.get('nom').invalid && this.service.fg.get('nom').touched}">
+        <div *ngIf = "service.fg.invalid && service.fg.get('nom').touched">
+            <small id="fileHelpId" *ngIf = "service.fg.get('nom').errors.required" class="form-text text-danger">
+                The Name Is Required
+            </small>
+        </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+              <div class="form-group">
+                  <label for="file"></label>
+                  <input type="file" class="form-control-file" name="file" id="file" placeholder=""
+                      (change)='uploadFile($event)' accept="image/*" aria-describedby="fileHelpId">
+                  <small id="fileHelpId" class="form-text text-muted">Help text</small>
+              </div>
+          </div>
+          <div class="col-md-4">
+              <img src="" id="image" *ngIf="service.file !== null" class="img-fluid" alt="">
+              <img *ngIf="service.file === null && service.tv.logo !== ''" src="{{service.tv.logo}}"
+                  class="img-fluid" alt="">
+          </div>
+      </div>
+</form>

@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="col-sm-12">
+        <div class="accordion" id="accordionExample">
+            <div class="card mb-0" *ngFor='let ch of serviceTeams.champions'>
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0"><a href="#ch{{ch.id}}" data-toggle="collapse" aria-expanded="false"
+                            aria-controls="collapseThree">{{ch.name}} <img src="{{getImageChampion(ch.image)}}" alt="" style="width: 29px;
+                            height: 31px;"></a></h5>
+                </div>
+                <div id="ch{{ch.id}}" class="collapse" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body" style="text-align: center;">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                               <tr>
+                                <th>#</th>
+                                <th>Team</th>
+                                <th>P</th>
+                                <th>M</th>
+                                <th>W</th>
+                                <th>L</th>
+                                <th>B</th>
+                               </tr>
+                            </thead>
+                            <tbody>
+                               <tr *ngFor='let teams of ch.teams;let cp = index'>
+                                <td>{{cp+1}}</td>
+                                <td><img src="{{getImageTeam(teams.team.logo)}}" alt="" style="width: 60px;height: 50px;">&nbsp;{{teams.team.nom}}</td>
+                                <td>{{teams.point}}</td>
+                                <td>{{teams.nbMatch}}</td>
+                                <td>{{teams.nbMatchW}}</td>
+                                <td>{{teams.nbMatchL}}</td>
+                                <td>{{teams.nbMatchB}}</td>
+                               </tr>
+                            </tbody>
+                         </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

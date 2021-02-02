@@ -1,0 +1,114 @@
+<section id="contant" class="contant main-heading team">
+    <div class="row">
+       <div class="container">
+          <div class="col-md-9">
+             <div class="feature-post small-blog" *ngFor='let item of service.blogs.getNews'>
+                <div class="col-md-5">
+                   <div class="feature-img">
+                      <img src="{{getImage(item.image)}}" class="img-responsive" alt="#" />
+                   </div>
+                </div>
+                <div class="col-md-7">
+                   <div class="feature-cont">
+                      <div class="post-info">
+                         <img src="../assets/images/DSC_0006.JPG" style="width: 100px;height: 100px;" alt="#" />
+                         <span>
+                            <h4>By : Admin</h4>
+                            <h5>on {{item.date_Publiciter | date }}</h5>
+                         </span>
+                      </div>
+                      <div class="post-heading">
+                         <h3>{{item.titre}}</h3>
+                         <p *ngIf='item.description.length>=300'>{{item.description.substring(0,300)}}</p>
+                         <p *ngIf='item.description.length<300'>{{item.description}}</p>
+                         <div class="full">
+                            <a class="btn" routerLink='/more/{{item.id}}'>Read More</a>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+             </div>
+          </div>
+          <div class="col-md-3">
+             <div class="blog-sidebar">
+                <h4 class="heading">Top Categories</h4>
+                <div class="category-menu">
+                   <ul>
+                      <li *ngFor='let cat of service.blogs.getCategories'><a href="#">{{cat.cat_Nom}}</a></li>
+                   </ul>
+                </div>
+             </div>
+             <div class="blog-sidebar">
+                <h4 class="heading">The Good SharpShooter</h4>
+                <div class="category-menu">
+                   <ul>
+                      <li>
+                        <span><img src="{{getImagePlayers(service.bestPlayer.image)}}" style="height: 200px;width: 200px;" alt="#"></span>
+                         <span>
+                            <p>{{service.bestPlayer.firstname}} {{service.bestPlayer.lastName}}</p>
+                            <p class="date">{{date | date}}</p>
+                         </span>
+                      </li>
+                   </ul>
+                </div>
+             </div>
+             <aside id="sidebar" class="left-bar">
+                <div class="feature-matchs">
+                  <div class="team-btw-match">
+                     <div *ngFor='let ch of serviceMatch.affichagematchNotPlay'>
+                       <ul *ngFor='let match of ch.matches'>
+                          <li>
+                             <img src="{{getImageTeam(match.team_Aller.logo)}}" class="imgTeam" alt="">
+                             <span>{{match.team_Aller.nom}}</span>
+                          </li>
+                          <li class="vs"><span>vs</span></li>
+                          <li>
+                             <img src="{{getImageTeam(match.team_Retour.logo)}}" class="imgTeam" alt="">
+                             <span>{{match.team_Retour.nom}}</span>
+                          </li>
+                       </ul>
+                     </div>
+                  </div>
+                </div>
+             </aside>
+             <aside id="sidebar" class="left-bar">
+                <div class="banner-sidebar">
+                   <img class="img-responsive" src="../assets/images/images/match-banner1.jpg" alt="#">
+                   <h3>Argentina vs Chile|Goals of the match | COPA </h3>
+                </div>
+             </aside>
+             <aside id="sidebar" class="left-bar">
+               <div class="feature-matchs" *ngFor='let ch of serviceTeams.champions'>
+                  <h1 class="alert alert-info">{{ch.name}} <img src="{{getImageChampion(ch.image)}}" alt="" class="imgTeam"></h1>
+                  <table class="table table-bordered table-hover">
+                     <thead>
+                        <tr>
+                           <th>#</th>
+                           <th>Team</th>
+                           <th>P</th>
+                           <th>M</th>
+                           <th>W</th>
+                           <th>L</th>
+                           <th>B</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr *ngFor='let teams of ch.teams;let cp = index'>
+                           <td>{{cp+1}}</td>
+                           <td><img src="{{getImageTeam(teams.team.logo)}}" alt=""
+                                 style="width: 30px;height: 30px;border-radius: 50%;">{{teams.team.nom}}</td>
+                           <td>{{teams.point}}</td>
+                           <td>{{teams.nbMatch}}</td>
+                           <td>{{teams.nbMatchW}}</td>
+                           <td>{{teams.nbMatchL}}</td>
+                           <td>{{teams.nbMatchB}}</td>
+                        </tr>
+                     </tbody>
+                  </table>
+                  <br>
+               </div>
+             </aside>
+          </div>
+       </div>
+    </div>
+ </section>

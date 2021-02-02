@@ -1,0 +1,120 @@
+<form action="" [formGroup]='service.fg'>
+        <div class="form-group">
+            <label for="nom">Last Name</label>
+            <input type="text" formControlName="nom" name="nom" id="nom" class="form-control"
+                [ngClass]="{'is-invalid': service.fg.get('nom').invalid && service.fg.get('nom').touched}" aria-describedby="helpId">
+            <div *ngIf="service.fg.get('nom').invalid && service.fg.get('nom').touched">
+                <small id="helpId" class="text-danger" *ngIf="service.fg.get('nom').errors.required">
+                    {{messageValidate.nom.required}}
+                </small>
+                <small id="helpId" class="text-danger"
+                    *ngIf="service.fg.get('nom').errors.minlength || service.fg.get('nom').errors.maxlength">
+                    {{messageValidate.nom.length}}
+                </small>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="prenom">First Name</label>
+            <input type="text" formControlName="prenom" name="prenom" id="prenom" class="form-control"
+                [ngClass]="{'is-invalid': service.fg.get('prenom').invalid && service.fg.get('prenom').touched}"
+                aria-describedby="helpId">
+            <div *ngIf="service.fg.get('prenom').invalid && service.fg.get('prenom').touched">
+                <small id="helpId" class="text-danger" *ngIf="service.fg.get('prenom').errors.required">
+                    {{messageValidate.prenom.required}}
+                </small>
+                <small id="helpId" class="text-danger"
+                    *ngIf="service.fg.get('prenom').errors.minlength || service.fg.get('prenom').errors.maxlength">
+                    {{messageValidate.prenom.length}}
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" formControlName="email" name="email" id="email" class="form-control"
+                [ngClass]="{'is-invalid': (service.fg.get('email').invalid || service.isEmailMatch()) && service.fg.get('email').touched}"
+                aria-describedby="helpId">
+            <div *ngIf="service.fg.get('email').invalid && service.fg.get('email').touched">
+                <small id="helpId" class="text-danger" *ngIf="service.fg.get('email').errors.required">
+                    {{messageValidate.email.required}}
+                </small>
+                <small id="helpId" class="text-danger" *ngIf="service.fg.get('email').errors.email">
+                    {{messageValidate.email.notValid}}
+                </small>
+            </div>
+            <div *ngIf="service.isEmailMatch() && service.fg.get('email').value !== null &&
+            service.fg.get('email').value !=='' && service.fg.get('userName').touched">
+                <small id="helpId" class="text-danger">
+                    {{messageValidate.email.matchEmail}}
+                </small>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="userName">UserName</label>
+            <input type="text" formControlName="userName" name="userName" id="userName" class="form-control"
+                [ngClass]="{'is-invalid': (service.fg.get('userName').invalid || service.isUserNameMatch()) && service.fg.get('userName').touched}"
+                aria-describedby="helpId">
+            <div *ngIf="(service.fg.get('userName').invalid) && service.fg.get('userName').touched">
+                <small id="helpId" class="text-danger" *ngIf="service.fg.get('userName').errors.required">
+                    {{messageValidate.userName.required}}
+                </small>
+                <small id="helpId" class="text-danger"
+                    *ngIf="service.fg.get('userName').errors.minlength || service.fg.get('userName').errors.maxlength">
+                    {{messageValidate.userName.length}}
+                </small>
+            </div>
+            <div *ngIf="service.isUserNameMatch() && service.fg.get('userName').touched">
+                <small id="helpId" class="text-danger" *ngIf="service.isUserNameMatch()">
+                    {{messageValidate.userName.matchUserName}}
+                </small>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" name="password" id="password" class="form-control"
+                [ngClass]="{'is-invalid': service.fg.get('password').invalid && service.fg.get('password').touched}"
+                aria-describedby="helpId">
+            <div *ngIf="service.fg.get('password').invalid && service.fg.get('password').touched">
+                <small id="helpId" class="text-danger" *ngIf="service.fg.get('password').errors.required">
+                    {{messageValidate.pass.required}}
+                </small>
+                <small id="helpId" class="text-danger" *ngIf="service.fg.get('password').errors.minlength">
+                    {{messageValidate.pass.minLength}}
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirme Password</label>
+            <input type="password" formControlName="confirmPassword" name="confirmPassword" id="confirmPassword"
+                class="form-control"
+                [ngClass]="{'is-invalid': service.fg.get('confirmPassword').touched &&
+       (service.fg.get('confirmPassword').invalid || (!isPasswordMatch() && this.service.fg.get('confirmPassword').value.length >5 && this.service.fg.get('password').value.length > 5))}"
+                aria-describedby="helpId">
+            <div *ngIf="service.fg.get('confirmPassword').touched && service.fg.get('confirmPassword').invalid">
+                <small id="helpId" class="text-danger" *ngIf="service.fg.get('confirmPassword').errors.required">
+                    {{messageValidate.passConfirm.required}}
+                </small>
+            </div>
+            <div *ngIf="service.fg.get('confirmPassword').touched && !isPasswordMatch() && 
+        this.service.fg.get('password').value !== ''
+        && this.service.fg.get('confirmPassword').value !== ''
+        && this.service.fg.get('confirmPassword').value.length >5 && this.service.fg.get('password').value.length > 5">
+                <small id="helpId" class="text-danger">
+                    {{messageValidate.passConfirm.isMatch}}
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="selectedValue">User Type</label>
+            <select (change)='select($event.target.value)' name="selectedValue" id="selectedValue" class="form-control">
+                <option value="{{-1}}" selected>---Select Role---</option>
+                <option *ngFor='let item of service.users.roles' value="{{item.id}}">{{item.roleName}}</option>
+            </select>
+            <small id="helpId" class="text-danger" *ngIf='roleMuch()'>
+                {{messageErrorRole}}
+            </small>
+        </div>
+</form>

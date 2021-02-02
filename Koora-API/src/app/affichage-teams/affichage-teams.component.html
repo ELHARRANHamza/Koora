@@ -1,0 +1,64 @@
+<div class="team-holder theme-padding">
+    <div class="container">
+       <div class="main-heading-holder">
+          <div class="main-heading sytle-2">
+             <h2>Meet Your Team</h2>
+             <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium<br>doloremque laudantium, totam rem aperiam</p>
+          </div>
+       </div>
+       <div id="team-slider">
+          <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="accordion" id="accordionExample">
+                        <div class="card mb-0" *ngFor='let country of service.listTeams'>
+                            <div class="card-header" id="headingOne">
+                                <h5 class="mb-0"><a href="#{{country.name}}" data-toggle="collapse" aria-expanded="false"
+                                        aria-controls="collapseThree"><img style="width: 40px;height: 30px;"
+                                            src="{{getImageCountry(country.image)}}" alt=""> {{country.name}}</a></h5>
+                            </div>
+                            <div id="{{country.name}}" class="collapse" aria-labelledby="headingOne"
+                                data-parent="#accordionExample">
+                                <div class="card-body">
+                                    <div class="card-body table-border-style">
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#</th>
+                                                        <th>Name</th>
+                                                        <th>Logo</th>
+                                                        <th>Players</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+        
+                                                    <tr *ngFor='let item of country.teams'>
+                                                        <td>{{item.id}}</td>
+                                                        <td>{{item.nom}}</td>
+                                                        <td>
+                                                            <img src="{{getImage(item.logo)}}" style="width: 60px;height: 40px;"
+                                                                alt="">
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-info" routerLink='/moreplayers/{{item.id}}'>
+                                                                <span class="fa fa-user"></span>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+          </div>
+       </div>
+    </div>
+ </div>
+
+

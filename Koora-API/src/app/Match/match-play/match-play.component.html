@@ -1,0 +1,157 @@
+<div class="card">
+    <div class="col-sm-12">
+        <div class="accordion" id="accordionExample">
+            <div class="card mb-0" *ngFor='let item of service.matchPlay.matches'>
+                <div class="card-header" id="headingOne">
+                    <div class="row">
+                        <table class="table">
+                            <tr style="text-align: center;">
+                                <td> <img style="width: 60px;height: 50px;" src="{{getImageTeam(item.team_Aller.logo)}}" alt="">
+                                    <br>
+                                    <a href="#ch{{item.id}}" data-toggle="collapse" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        <h3 class="mb-0">{{item.team_Aller.nom}}</h3>
+                                    </a>
+                                    <button class="btn btn-outline-info" data-toggle="modal"
+                                        data-target="#modelPlayersTeamAller"
+                                        (click)="service.loadComboPlayersTeamAller(item.team_Aller.id)">Goal</button></td>
+                                        <td></td>
+                                <td>
+                                    <button class="btn btn-success btn-lg">{{item.res_TeamAller}}</button>&nbsp;
+                                    <button class="btn btn-primary btn-lg">VS</button>&nbsp;
+                                    <button class="btn btn-success btn-lg">{{item.res_TeamRetour}}</button>
+                                </td>
+                                <td>
+                                    <img style="width: 60px;height: 50px;" src="{{getImageTeam(item.team_Retour.logo)}}" alt="">
+                                    <br>
+                                    <a href="#ch{{item.id}}" data-toggle="collapse" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                        <h3 class="mb-0">{{item.team_Retour.nom}}</h3>
+                                    </a>
+                                    <button class="btn btn-outline-info" data-toggle="modal"
+                                        data-target="#modelPlayersTeamRetour"
+                                        (click)='service.loadComboPlayersTeamRetour(item.team_Retour.id)'>Goal</button>
+                                </td>
+                            </tr>
+                            <tr>
+<td colspan="4" style="text-align: center;">
+    <button class="btn btn-lg btn-outline-danger" (click)='finish(item.id,item.team_Aller.id,item.team_Retour.id)'>Finish</button>
+</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div id="ch{{item.id}}" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+
+                    </div>
+                </div>
+
+                <!-- Modal Players Team Aller-->
+                <div class="modal fade" id="modelPlayersTeamAller" tabindex="-1" role="dialog"
+                    aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Players Team {{item.team_Aller.nom}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form [formGroup]='fg'>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="players">Players</label>
+                                        <select name="" id="players" class="form-control"
+                                            formControlName='idPlayersAller'
+                                            [ngClass]="{'is-invalid': this.fg.get('idPlayersAller').value == 0 && this.fg.get('idPlayersAller').touched}">
+                                            <option value="{{0}}">-- Select SharpShooter --</option>
+                                            <option *ngFor="let players of service.playersAller" value="{{players.id}}">
+                                                {{players.firstname}}
+                                                {{players.lastName}}</option>
+                                        </select>
+                                        <small id="fileHelpId"
+                                            *ngIf="this.fg.get('idPlayersAller').value == 0 && this.fg.get('idPlayersAller').touched"
+                                            class="form-text text-danger">
+                                            Select One SharpShooter
+                                        </small>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="minute1">Minute</label>
+                                        <input type="number" formControlName='minute' min="1" id="minute1"
+                                            class="form-control"
+                                            [ngClass]="{'is-invalid': (this.fg.get('minute').value === 0 || this.fg.get('minute').value === null) && this.fg.get('minute').touched}">
+                                            <small id="fileHelpId" *ngIf="(this.fg.get('minute').value === 0 || this.fg.get('minute').value === null) && this.fg.get('minute').touched"
+                                                class="form-text text-danger">
+                                                The Minute Is Required
+                                            </small>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" [disabled]="(this.fg.get('minute').value === 0 || this.fg.get('minute').value === null) || this.fg.get('idPlayersAller').value == 0" (click)='posteGoal(item.team_Aller.id,item.id)'>Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- Modal Players Team Retour-->
+                <div class="modal fade" id="modelPlayersTeamRetour" tabindex="-1" role="dialog"
+                    aria-labelledby="modelTitleId" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Players Team {{item.team_Retour.nom}}</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form [formGroup]='fg'>
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="players1">Players</label>
+                                        <select name="" id="players1" class="form-control"
+                                            formControlName='idPlayersRetour'
+                                            [ngClass]="{'is-invalid': this.fg.get('idPlayersRetour').value == 0 && this.fg.get('idPlayersRetour').touched}">
+                                            <option value="{{0}}">-- Select SharpShooter --</option>
+                                            <option *ngFor="let players of service.playersRetour"
+                                                value="{{players.id}}">{{players.firstname}} {{players.lastName}}
+                                            </option>
+                                        </select>
+                                        <small id="fileHelpId"
+                                            *ngIf="this.fg.get('idPlayersRetour').value == 0 && this.fg.get('idPlayersRetour').touched"
+                                            class="form-text text-danger">
+                                            Select One SharpShooter
+                                        </small>
+                                    </div>
+
+
+                                    <div class="form-group">
+                                        <label for="minute">Minute</label>
+                                        <input type="number" formControlName='minute' min="1" id="minute"
+                                            class="form-control"
+                                            [ngClass]="{'is-invalid': (this.fg.get('minute').value === 0 || this.fg.get('minute').value === null) && this.fg.get('minute').touched}">
+                                       
+                                            <small id="fileHelpId" *ngIf="(this.fg.get('minute').value === 0 || this.fg.get('minute').value === null) && this.fg.get('minute').touched"
+                                                class="form-text text-danger">
+                                                The Minute Is Required
+                                            </small>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="button" class="btn btn-primary" [disabled]="(this.fg.get('minute').value === 0 || this.fg.get('minute').value === null) || this.fg.get('idPlayersRetour').value == 0" (click)='posteGoal(0,item.id)'>Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

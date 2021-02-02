@@ -1,0 +1,30 @@
+<form [formGroup]='service.fg'>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" formControlName='name' id="name" class="form-control"
+        [ngClass]="{'is-invalid': this.service.fg.get('name').invalid && this.service.fg.get('name').touched}">
+        <div *ngIf = "service.fg.invalid && service.fg.get('name').touched">
+            <small id="fileHelpId" *ngIf = "service.fg.get('name').errors.required" class="form-text text-danger">
+                The Name Is Required
+            </small>
+            <small id="fileHelpId" *ngIf = "service.fg.get('name').errors.maxlength || service.fg.get('name').errors.minlength" class="form-text text-danger">
+                The Minimum Length Is 3 And The Maximum Length Is 30
+            </small>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+              <div class="form-group">
+                <label for="file"></label>
+                <input type="file" class="form-control-file" name="file" id="file" placeholder=""
+                  (change)='uploadFile($event)' accept="image/*" aria-describedby="fileHelpId">
+                <small id="fileHelpId" class="form-text text-muted">Help text</small>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <img src="" id="image" *ngIf="service.file !== null" class="img-fluid" alt="">
+               <img *ngIf="service.file === null && service.contry.image !== ''" src="{{service.contry.image}}" class="img-fluid" alt="">
+            </div>
+          </div>
+        
+</form>

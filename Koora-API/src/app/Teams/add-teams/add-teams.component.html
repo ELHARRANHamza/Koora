@@ -1,0 +1,52 @@
+<form [formGroup]='service.fg'>
+    <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" formControlName='nom' id="name" class="form-control"
+            [ngClass]="{'is-invalid': this.service.fg.get('nom').invalid && this.service.fg.get('nom').touched}">
+        <div *ngIf="service.fg.invalid && service.fg.get('nom').touched">
+            <small id="fileHelpId" *ngIf="service.fg.get('nom').errors.required" class="form-text text-danger">
+                The Name Is Required
+            </small>
+            <small id="fileHelpId" *ngIf="service.fg.get('nom').errors.minlength" class="form-text text-danger">
+                The Minimum Length Is 3
+            </small>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Country">Contry</label>
+        <select id="Country" formControlName='id_Country' class="form-control" 
+        [ngClass]="{'is-invalid': this.service.fg.get('id_Country').value == 0 && this.service.fg.get('id_Country').touched}">
+            <option value="{{0}}">--- Select Contry ---</option>
+            <option *ngFor='let contry of service.loadCmb.contries' value="{{contry.id}}">{{contry.name}}</option>
+        </select>
+        <small id="fileHelpId" *ngIf="this.service.fg.get('id_Country').value == 0 && this.service.fg.get('id_Country').touched" class="form-text text-danger">
+            Select One Contry
+        </small>
+    </div>
+    <div class="form-group">
+        <label for="Category">Category</label>
+        <select id="Category" formControlName='id_Cat' class="form-control"
+        [ngClass]="{'is-invalid': this.service.fg.get('id_Cat').value == 0 && this.service.fg.get('id_Cat').touched}">
+            <option value="0">--- Select Category ---</option>
+            <option *ngFor='let cat of service.loadCmb.categories' value="{{cat.id}}">{{cat.cat_Nom}}</option>
+        </select>
+        <small id="fileHelpId" *ngIf="this.service.fg.get('id_Cat').value == 0 && this.service.fg.get('id_Cat').touched" class="form-text text-danger">
+            Select One Category
+        </small>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="file"></label>
+                <input type="file" class="form-control-file" name="file" id="file" placeholder=""
+                    (change)='uploadFile($event)' accept="image/*" aria-describedby="fileHelpId">
+                <small id="fileHelpId" class="form-text text-muted">Help text</small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <img src="" id="image" *ngIf="service.teams.file !== null" class="img-fluid" alt="">
+            <img *ngIf="service.teams.file === null && service.teams.logo !== ''" src="{{service.teams.logo}}"
+                class="img-fluid" alt="">
+        </div>
+    </div>
+</form>

@@ -1,0 +1,159 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Liste All Match</h5>
+
+                <span class="d-block mt-2">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-outline-primary" (click)='loadData()' data-toggle="modal"
+                        data-target="#modelId">
+                        <i class="fa fa-pencil"></i> Create
+                    </button>
+                </span>
+
+                <!-- Modal -->
+                <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" *ngIf="service.match.id === 0">Add New Match</h5>
+                                <h5 class="modal-title" *ngIf="service.match.id !== 0">Edit This Match</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="alert alert-success alert-dismissible fade show" role="alert"
+                                    *ngIf="message !==''">
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                    <strong>{{message}}</strong>
+                                </div>
+                                <app-add-match></app-add-match>
+                                <script>
+                                    $(".alert").alert();
+                                </script>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" *ngIf="service.match.id === 0"
+                                    (click)='Add()'
+                                    [disabled]="service.fg.invalid  || this.service.fg.get('id_team_Aller').value == 0 || this.service.fg.get('id_team_Retour').value == 0"><i
+                                        class="fas fa-save"></i> Save</button>
+                                <button type="button" class="btn btn-info" (click)="Edit()"
+                                    *ngIf="service.match.id !== 0"
+                                    [disabled]="service.fg.invalid  || this.service.fg.get('id_team_Aller').value == 0 || this.service.fg.get('id_team_Retour').value == 0"><i
+                                        class="fas fa-save"></i>Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-sm-12">
+                <div class="accordion" id="accordionExample">
+                    <div class="card mb-0">
+                        <div class="card-header" id="headingOne">
+                            <h5 class="mb-0"><a href="#ch" data-toggle="collapse" aria-expanded="false"
+                                    aria-controls="collapseThree"><img style="width: 40px;height: 30px;"
+                                        src="{{getImageChampion(this.service.matchNotPlay.image)}}" alt=""> {{this.service.matchNotPlay.name}}</a></h5>
+                        </div>
+                        <div id="ch" class="collapse show" aria-labelledby="headingOne"
+                            data-parent="#accordionExample">
+                            <div class="card-body" style="text-align: center;">
+                                <div class="card-body table-border-style">
+                                    <div class="table-responsive">
+                                        <table class="table table-striped">
+                                            <thead>
+                                                <tr>
+                                                    <th>Team Aller</th>
+                                                    <th>Team Retour</th>
+                                                    <th>Stade</th>
+                                                    <th>date Match</th>
+                                                    <th>Mettre a jour</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+
+                                                <tr *ngFor='let item of service.matchNotPlay.matches'>
+                                                    <td>
+                                                        <img src="{{getImageTeam(item.team_Aller.logo)}}"
+                                                        style="width: 60px;height: 60px; border-radius: 50%;" alt="">
+                                                        <br>
+                                                        {{item.team_Aller.nom}}
+                                                    </td>
+                                                    <td>
+                                                        <img src="{{getImageTeam(item.team_Retour.logo)}}"
+                                                        style="width: 60px;height: 60px;border-radius: 50%;" alt="">
+                                                        <br>
+                                                        {{item.team_Retour.nom}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.stade}}
+                                                    </td>
+                                                    <td>
+                                                        {{item.date_Match | date: 'dd/MM/yyyy hh:mm'}}
+                                                    </td>
+                                                    <td><button type="button" (click)='select(item)'
+                                                            class="btn btn-icon btn-outline-warning has-ripple"
+                                                            data-toggle="modal" data-target="#modelId"><span
+                                                                class="fa fa-edit"></span></button>
+                                                        | <button type="button" (click)='select(item)'
+                                                            class="btn btn-icon btn-outline-danger" data-toggle="modal" data-target="#modelDelete"><i
+                                                                class="fa fa-trash-o"></i></button> | 
+                                                                <button type="button" (click)='navigate.MatchTv(item.id)' class="btn btn-icon btn-outline-primary" data-toggle="modal" data-target="#modelDelete"><i
+                                                                class="fa fa-television"></i></button>
+                                                            </td>
+                                                    <!-- Modal Delete -->
+                                                    <div class="modal fade" id="modelDelete" tabindex="-1" role="dialog"
+                                                        aria-labelledby="modelTitleId" aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title">Question</h5>
+                                                                    <button type="button" class="close"
+                                                                        data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                    <div class="alert alert-Success alert-dismissible fade show"
+                                                                        role="alert" *ngIf="message !== ''">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="alert" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                        <strong>{{message}}</strong>
+                                                                    </div>
+
+                                                                    <script>
+                                                                        $(".alert").alert();
+                                                                    </script>
+                                                                  Do You Want Delete This Match
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Close</button>
+                                                                    <button type="button" class="btn btn-danger"
+                                                                        (click)='Delete()'>Delete</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="card">
+    <div class="col-sm-12">
+        <div class="accordion" id="accordionExample">
+
+            <div class="card mb-0" *ngFor='let ch of service.affichagematchNotPlay'>
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0"><a href="#champion{{ch.id}}" data-toggle="collapse" aria-expanded="false"
+                            aria-controls="collapseThree"><img style="width: 40px;height: 30px;"
+                                src="{{getImageChampion(ch.image)}}" alt=""> {{ch.name}}</a></h5>
+                </div>
+                <div id="champion{{ch.id}}" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample1">
+                        <div class="card mb-0" *ngFor='let item of ch.matches'>
+                            <div class="card-header" id="headingOne">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <img style="width: 60px;height: 50px;"
+                                            src="{{getImageTeam(item.team_Aller.logo)}}" alt="">
+                                        <br>
+                                        <a>
+                                            <h3 class="mb-0">{{item.team_Aller.nom}}</h3>
+                                        </a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h4>{{item.date_Match | date: 'dd/MM/yyyy'}}</h4>
+                                        <h3>{{item.date_Match | date: 'hh:mm'}}</h3>
+                                        <br>
+                                        <a href="#ch{{item.id}}" data-toggle="collapse" aria-expanded="false"
+                                        aria-controls="collapseThree" class="btn btn-lg btn-primary">Channels</a>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <img style="width: 60px;height: 50px;"
+                                            src="{{getImageTeam(item.team_Retour.logo)}}" alt="">
+                                        <br>
+                                        <a>
+                                            <h3 class="mb-0">{{item.team_Retour.nom}}</h3>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ch{{item.id}}" class="collapse show" aria-labelledby="headingOne"
+                                data-parent="#accordionExample1">
+                                <div class="card-body">
+                                    <ul class="other-stroies">
+                                        <li *ngFor='let tv of item.match_TVs'><a><i class="fa fa-television" aria-hidden="true"></i> {{tv.tv.nom}}</a> 
+                                           &nbsp; <img src="{{getImageChanel(tv.tv.logo)}}" alt="" style="width: 29px;height: 31px;"></li>
+                                     </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

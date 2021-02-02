@@ -1,0 +1,89 @@
+<div class="card">
+    <div class="col-sm-12">
+        <div class="accordion" id="accordionExample">
+
+            <div class="card mb-0" *ngFor='let ch of service.affichagematchPlay'>
+                <div class="card-header" id="headingOne">
+                    <h5 class="mb-0"><a href="#champion{{ch.id}}" data-toggle="collapse" aria-expanded="false"
+                            aria-controls="collapseThree"><img style="width: 40px;height: 30px;"
+                                src="{{getImageChampion(ch.image)}}" alt=""> {{ch.name}}</a></h5>
+                </div>
+                <div id="champion{{ch.id}}" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <div class="accordion" id="accordionExample1">
+                        <div class="card mb-0" *ngFor='let item of ch.matches'>
+                            <div class="card-header" id="headingOne">
+                                <div class="row">
+                                    <table class="table">
+                                        <tr style="text-align: center;">
+                                            <td> <img style="width: 60px;height: 50px;" src="{{getImageTeam(item.team_Aller.logo)}}" alt="">
+                                                <br>
+                                                <a>
+                                                    <h3 class="mb-0">{{item.team_Aller.nom}}</h3>
+                                                </a>
+                                </td>
+                                                    <td></td>
+                                            <td>
+                                                <button class="btn btn-success btn-lg">{{item.res_TeamAller}}</button>&nbsp;
+                                                <button class="btn btn-primary btn-lg">VS</button>&nbsp;
+                                                <button class="btn btn-success btn-lg">{{item.res_TeamRetour}}</button>
+                                            </td>
+                                            <td>
+                                                <img style="width: 60px;height: 50px;" src="{{getImageTeam(item.team_Retour.logo)}}" alt="">
+                                                <br>
+                                                <a>
+                                                    <h3 class="mb-0">{{item.team_Retour.nom}}</h3>
+                                                </a>
+                                              
+                                            </td>
+                                        </tr>
+                                        <tr>
+<td colspan="4" style="text-align: center;"><a href="#ch{{item.id}}" class="btn btn-lg btn-info" data-toggle="collapse" aria-expanded="false"
+    aria-controls="collapseThree">SharpShooter</a></td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="ch{{item.id}}" class="collapse" aria-labelledby="headingOne"
+                                data-parent="#accordionExample1">
+                                <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div *ngFor='let goal of item.goals'>
+                                                    <a *ngIf='item.team_Aller.id === goal.players.team.id'> 
+                                                        <i class="fa fa-clock-o" aria-hidden="true"></i> <span *ngIf='goal.minute<10'>0{{goal.minute}}</span>
+                                                        <span *ngIf='goal.minute>=10'>{{goal.minute}}</span>&nbsp;<span class="badge badge-secondary">min</span>
+                                                        &nbsp;<img src="{{getImagePlayers(goal.players.image)}}" alt="" style="width: 31px;height: 31px;border-radius: 50%;">
+                                                        {{goal.players.firstname}} {{goal.players.lastName}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div *ngFor='let goal of item.goals' style="text-align: right;">
+                                                    <a *ngIf='item.team_Retour.id === goal.players.team.id'> 
+                                                        <i class="fa fa-clock-o" aria-hidden="true"></i> <span *ngIf='goal.minute<10'>0{{goal.minute}}</span>
+                                                        <span *ngIf='goal.minute>=10'>{{goal.minute}}</span>&nbsp;<span class="badge badge-secondary">min</span>
+                                                        &nbsp;<img src="{{getImagePlayers(goal.players.image)}}" alt="" style="width: 31px;height: 31px;border-radius: 50%;">
+                                                        {{goal.players.firstname}} {{goal.players.lastName}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                               
+                                                        
+                                         
+                                              
+                                                        
+                                                   
+                                         
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

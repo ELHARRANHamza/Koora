@@ -1,0 +1,50 @@
+<form [formGroup]='this.service.fg'>
+  <div class="form-group">
+    <label for="Titre">Titre</label>
+    <input type="text" formControlName='Titre' name="Titre" id="Titre" class="form-control bg-light"
+      [ngClass]="{'is-invalid': this.service.fg.get('Titre').invalid && this.service.fg.get('Titre').touched}">
+    <div *ngIf="this.service.fg.get('Titre').invalid && this.service.fg.get('Titre').touched">
+      <small id="helpId" class="text-danger"
+        *ngIf="this.service.fg.get('Titre').errors.required">{{messageValidation.Titre.required}}</small>
+      <small id="helpId" class="text-danger"
+        *ngIf="this.service.fg.get('Titre').errors.maxlength || this.service.fg.get('Titre').errors.minlength">
+        {{messageValidation.Titre.Lenght}}
+      </small>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Description">Description</label>
+    <textarea type="text" formControlName='Description' name="Description" id="Description"
+      class="form-control bg-light" rows="4"
+      [ngClass]="{'is-invalid' : this.service.fg.get('Description').invalid && this.service.fg.get('Description').touched}">
+    </textarea>
+    <div *ngIf="this.service.fg.get('Description').invalid && this.service.fg.get('Description').touched">
+      <small id="helpId" class="text-danger" *ngIf="this.service.fg.get('Description').errors.required">{{messageValidation.Description.required}}</small>
+      <small id="helpId" class="text-danger" *ngIf="this.service.fg.get('Description').errors.minlength">{{messageValidation.Description.Lenght}}</small>
+    </div>
+  
+  </div>
+
+  <div class="form-group">
+    <label for="cat">Category</label>
+    <select class="form-control bg-light" name="selectedValues" id="cat" (change)='selectValue($event.target.value)'>
+      <option value="{{-1}}">---Select one---</option>
+      <option *ngFor='let item of this.serviceCat.categories' value='{{item.id}}'>{{item.cat_Nom}}</option>
+    </select>
+    <small id="fileHelpId" class="form-text text-danger" *ngIf='service.selectedValues == -1'>{{messageValidation.Categorie.much}}</small>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="file"></label>
+        <input type="file" class="form-control-file" formControlName='file' name="file" id="file" placeholder=""
+          (change)='uploadFile($event)' accept="image/*" aria-describedby="fileHelpId">
+        <small id="fileHelpId" class="form-text text-muted">Help text</small>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <img *ngIf="service.news.image === ''" src="" id="image" class="img-fluid" alt="">
+      <img *ngIf="service.news.image !== ''" src="{{service.news.image}}" class="img-fluid" alt="">
+    </div>
+  </div>
+</form>

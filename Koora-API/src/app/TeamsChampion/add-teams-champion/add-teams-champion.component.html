@@ -1,0 +1,13 @@
+<form [formGroup]='service.fg'>
+    <div class="form-group">
+        <label for="teams">Name </label>
+        <select  formControlName='id_Teams' id="teams" class="form-control" 
+        [ngClass]="{'is-invalid': this.service.fg.get('id_Teams').value == 0 && this.service.fg.get('id_Teams').touched}">
+            <option value="{{0}}">--- Select teams Name ---</option>
+            <option *ngFor='let team of service.teams' value="{{team.id}}">{{team.nom}}</option>
+        </select>
+        <small id="fileHelpId" *ngIf="this.service.fg.get('id_Teams').value == 0 && this.service.fg.get('id_Teams').touched" class="form-text text-danger">
+            Select One teams Name
+        </small>
+    </div>
+</form>

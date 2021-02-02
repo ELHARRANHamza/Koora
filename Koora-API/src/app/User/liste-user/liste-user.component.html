@@ -1,0 +1,121 @@
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-header">
+                <h5>Liste All Users</h5>
+
+                <span class="d-block mt-2">
+                    <!-- Button Create modal -->
+                    <button type="button" class="btn btn-outline-primary" data-toggle="modal"
+                        data-target="#modelCreate">
+                        <i class="fa fa-pencil"></i> Create
+                    </button>
+                </span>
+
+                <!-- Modal Create -->
+                <div class="modal fade" id="modelCreate" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+                    aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Add New User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <app-add-user></app-add-user>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button [disabled]='service.fg.invalid ||
+                                 !isPasswordMatch() ||
+                                  service.isUserNameMatch() ||
+                                  service.isEmailMatch() ||
+                                    roleMuch()' (click)='Create()' class="btn btn-primary">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                                                <!-- Modal Delete -->
+
+                                                <div class="modal fade" id="modelDelete" tabindex="-1" role="dialog"
+                                                aria-labelledby="modelTitleId" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title">Message Confirmation</h5>
+                                                            <button type="button" class="close" data-dismiss="modal"
+                                                                aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Do You Want Delete This User "{{service.fg.get('email').value}}"
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary"
+                                                                data-dismiss="modal">Close</button>
+                                                            <button type="button" (click)='Delete()' class="btn btn-danger">Delete</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+            </div>
+            <div class="card-body table-border-style">
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Role</th>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>email</th>
+                                <th>userName</th>
+                                <th>Mettre a jour</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let item of service.Allusers'>
+                                <td>{{item.roles.roleName}}</td>
+                                <td>{{item.prenom}}</td>
+                                <th>{{item.nom}}</th>
+                                <th>{{item.email}}</th>
+                                <th>{{item.userName}}</th>
+                                <td><button type="button" (click)='select(item)'
+                                        class="btn btn-icon btn-outline-warning" data-toggle="modal"
+                                        data-target="#modelEdit"><i class="fa fa-edit"></i></button>
+                                    | <button type="button" (click)='select(item)'
+                                        class="btn btn-icon btn-outline-danger" data-toggle="modal"
+                                        data-target="#modelDelete"><i class="fa fa-trash-o"></i></button></td>
+
+                                <!-- Modal  Edit-->
+                                <div class="modal fade" id="modelEdit" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Edit User</h5>
+                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                            </div>
+                                            <div class="modal-body" style="overflow: auto;">
+                                               <app-edit-user></app-edit-user>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

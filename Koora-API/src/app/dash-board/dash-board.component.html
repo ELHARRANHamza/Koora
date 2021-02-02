@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<title>Ablepro v8.0 bootstrap admin template by Phoenixcoded</title>
+	<!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 11]>
+    	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    	<![endif]-->
+	<!-- Meta -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="description" content="" />
+	<meta name="keywords" content="">
+	<meta name="author" content="Phoenixcoded" />
+	<!-- Favicon icon -->
+	<link rel="icon" href="assets/images/favicon.ico" type="image/x-icon">
+</head>
+
+<body class="">
+	<!-- [ Pre-loader ] start -->
+	<div class="loader-bg">
+		<div class="loader-track">
+			<div class="loader-fill"></div>
+		</div>
+	</div>
+	<!-- [ Pre-loader ] End -->
+	<!-- [ navigation menu ] start -->
+	<nav class="pcoded-navbar menu-light ">
+		<div class="navbar-wrapper  ">
+			<div class="navbar-content scroll-div ">
+
+				<div class="">
+					<div class="main-menu-header">
+						<img class="img-radius" src="{{srcImage()}}" style="width: 70px;height: 70px;"
+							alt="User-Profile-Image">
+						<div class="user-details">
+							<a>
+								<h5>Admin</h5>
+							</a>
+						</div>
+					</div>
+				</div>
+
+				<ul class="nav pcoded-inner-navbar ">
+					<li class="nav-item pcoded-menu-caption">
+						<label>Navigation</label>
+					</li>
+					<li class="nav-item">
+						
+						<a (click)='navigate.Dashboard()' class="nav-link "><span class="pcoded-micon"><i
+									class="feather icon-pie-chart"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+					</li>
+					<li class="nav-item pcoded-menu-caption">
+						<label>Element</label>
+					</li>
+					<li class="nav-item">
+						<a (click)='navigate.News()' class="nav-link "><span class="pcoded-micon"></span><span class="pcoded-mtext">News</span></a>
+					</li>
+					<li class="nav-item">
+						<a (click)='navigate.Categorie()' class="nav-link "><span class="pcoded-micon"></span><span
+								class="pcoded-mtext">Category</span></a>
+					</li>
+					<li class="nav-item">
+						<a (click)='navigate.Country(0)' class="nav-link "><span class="pcoded-micon"></span><span
+								class="pcoded-mtext">Country</span></a>
+					</li>
+					<li class="nav-item">
+						<a (click)='navigate.Teams()' class="nav-link "><span class="pcoded-micon"></span><span
+								class="pcoded-mtext">Teams</span></a>
+					</li>
+					<li class="nav-item">
+						<a (click)='navigate.Tv()' class="nav-link "><span class="pcoded-micon"></span><span
+								class="pcoded-mtext">Tv</span></a>
+					</li>
+					<li class="nav-item">
+						<a (click)='navigate.Champion()' class="nav-link "><span class="pcoded-micon"></span><span
+								class="pcoded-mtext">Champion</span></a>
+					</li>
+					<li class="nav-item">
+						<a (click)='navigate.User()' class="nav-link "><span class="pcoded-micon"></span><span
+								class="pcoded-mtext">Users</span></a>
+					</li>
+					<li class="nav-item">
+						<a (click)='navigate.Role()' class="nav-link "><span class="pcoded-micon"></span><span
+								class="pcoded-mtext">Roles</span></a>
+					</li>
+					
+				</ul>
+
+			</div>
+		</div>
+	</nav>
+	<!-- [ navigation menu ] end -->
+	<!-- [ Header ] start -->
+	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
+
+
+		<div class="m-header">
+			<a class="mobile-menu" id="mobile-collapse"><span></span></a>
+			<a class="b-brand">
+				<!-- ========   change your logo hear   ============ -->
+				<img src="../assets/images/dashboard/images/logo.png" alt="" class="logo">
+				<img src="../assets/images/dashboard/images/logo-icon.png" alt="" class="logo-thumb">
+			</a>
+			<a class="mob-toggler">
+				<i class="feather icon-more-vertical"></i>
+			</a>
+		</div>
+		<div class="collapse navbar-collapse">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item">
+					<a class="pop-search"><i class="feather icon-search"></i></a>
+					<div class="search-bar">
+						<input type="text" class="form-control border-0 shadow-none" placeholder="Search hear">
+						<button type="button" class="close" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				</li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li>
+					<div class="dropdown drp-user">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+							<i class="feather icon-user"></i>
+						</a>
+						<div class="dropdown-menu dropdown-menu-right profile-notification">
+							<div class="pro-head">
+								<img src="{{srcImage()}}" style="width: 40px;height: 40px;" class="img-radius"
+									alt="User-Profile-Image">
+								<span>{{userName}}</span>
+								<a (click)='logout()' class="dud-logout" title="Logout">
+									<i class="feather icon-log-out"></i>
+								</a>
+							</div>
+							<ul class="pro-body">
+								<li><a (click)='navigate.ChangeImage()' class="dropdown-item"><i
+											class="feather icon-user"></i> Change Image</a></li>
+								<li><a (click)='navigate.Message()' class="dropdown-item"><i class="feather icon-mail"></i>
+										My Messages</a></li>
+								<li><a routerLink='/home' class="dropdown-item"><i class="feather icon-home"></i> Page
+										Home</a></li>
+							</ul>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</header>
+	<!-- [ Header ] end -->
+
+
+
+	<!-- [ Main Content ] start -->
+	<div class="pcoded-main-container" style="min-height: 1000px;">
+		<div class="pcoded-content">
+			<div class="page-header">
+				<div class="page-block">
+					<div class="row align-items-center">
+						<div class="col-md-12">
+							<div class="page-header-title">
+								<h5 class="m-b-10">Badges</h5>
+							</div>
+							<ul class="breadcrumb">
+								<li class="breadcrumb-item"><a href="index.html"><i class="feather icon-home"></i></a>
+								</li>
+								<li class="breadcrumb-item"><a>Basic Components</a></li>
+								<li class="breadcrumb-item"><a>Badges</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- [ breadcrumb ] end -->
+			<!-- [ Main Content ] start -->
+
+			<!-- [ badge ] start -->
+			<div *ngIf='navigate.isDashBoard'>
+				<app-dash></app-dash>
+			</div>
+			<div *ngIf='navigate.isCategory'>
+				<app-categorie></app-categorie>
+			</div>
+			<div *ngIf='navigate.isNews'>
+				<app-list-news></app-list-news>
+			</div>
+			<div *ngIf='navigate.isUser'>
+				<app-liste-user></app-liste-user>
+			</div>
+			<div *ngIf='navigate.isRole'>
+				<app-liste-roles></app-liste-roles>
+			</div>
+			<div *ngIf='navigate.isChangeImage'>
+				<app-change-image></app-change-image>
+			</div>
+			<div *ngIf='navigate.isCountry'>
+				<app-list-contry></app-list-contry>
+			</div>
+			<div *ngIf='navigate.isTeams'>
+				<app-list-teams></app-list-teams>
+			</div>
+			<div *ngIf='navigate.isPlayers'>
+				<app-list-players></app-list-players>
+			</div>
+			<div *ngIf='navigate.isTv'>
+				<app-list-tv></app-list-tv>
+			</div>
+			<div *ngIf='navigate.isChampions'>
+				<app-all-champions></app-all-champions>
+			</div>
+			<div *ngIf='navigate.isMessage'>
+				<app-all-message></app-all-message>
+			</div>
+			<div *ngIf='navigate.isMatchChampion'>
+				<div class="row">
+					<div class="col-xl-12">
+						<!-- [ tabs ] start -->
+						<div class="col-sm-12">
+							<div class="card">
+								<div class="card-header">
+									<h5>About This Champion</h5>
+								</div>
+								<div class="card-body">
+									<ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+										<li class="nav-item">
+											<a class="nav-link active text-uppercase" id="contact-tab" data-toggle="tab"
+												href="#teams" role="tab" aria-controls="teams"
+												aria-selected="false">Teams</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-uppercase" id="contact-tab" data-toggle="tab"
+												href="#matchPlay" role="tab" aria-controls="teams"
+												aria-selected="false">Match Play Now</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-uppercase" id="home-tab" data-toggle="tab"
+												href="#home" role="tab" aria-controls="home" aria-selected="true">Match
+												not Play</a>
+										</li>
+										<li class="nav-item">
+											<a class="nav-link text-uppercase" id="profile-tab" data-toggle="tab"
+												href="#profile" role="tab" aria-controls="profile"
+												aria-selected="false">Add New Match</a>
+										</li>
+									</ul>
+									<div class="tab-content" id="myTabContent">
+										<div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+											<app-match-champion></app-match-champion>
+										</div>
+										<div class="tab-pane fade" id="profile" role="tabpanel"
+											aria-labelledby="profile-tab">
+											<app-list-match></app-list-match>
+										</div>
+										<div class="tab-pane fade" id="matchPlay" role="tabpanel"
+										aria-labelledby="profile-tab">
+										<app-match-play></app-match-play>
+									</div>
+										<div class="tab-pane fade show active" id="teams" role="tabpanel"
+											aria-labelledby="teams-tab">
+											<app-teams-champion></app-teams-champion>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- [ badge ] end -->
+			<div *ngIf='navigate.isMatchTv'>
+				<app-list-match-tv></app-list-match-tv>
+			</div>
+			<div *ngIf='navigate.isTeamChampion'>
+				<app-all-teams-champion></app-all-teams-champion>
+			</div>
+		</div>
+		<!-- [ Main Content ] end -->
+	</div>
+</body>
+
+</html>

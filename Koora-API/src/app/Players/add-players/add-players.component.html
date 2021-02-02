@@ -1,0 +1,99 @@
+
+<form [formGroup]='service.fg'>
+    <div class="form-group">
+        <label for="name">First Name</label>
+        <input type="text" formControlName='firstname' id="name" class="form-control"
+            [ngClass]="{'is-invalid': this.service.fg.get('firstname').invalid && this.service.fg.get('firstname').touched}">
+        <div *ngIf="service.fg.invalid && service.fg.get('firstname').touched">
+            <small id="fileHelpId" *ngIf="service.fg.get('firstname').errors.required" class="form-text text-danger">
+                The First Name Is Required
+            </small>
+            <small id="fileHelpId" *ngIf="service.fg.get('firstname').errors.minlength || service.fg.get('firstname').errors.maxlength" class="form-text text-danger">
+                The Minimum Length Is 3 And The Maximum Length Is 35
+            </small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input type="text" formControlName='lastName' id="lastName" class="form-control"
+            [ngClass]="{'is-invalid': this.service.fg.get('lastName').invalid && this.service.fg.get('lastName').touched}">
+        <div *ngIf="service.fg.invalid && service.fg.get('lastName').touched">
+            <small id="fileHelpId" *ngIf="service.fg.get('lastName').errors.required" class="form-text text-danger">
+                The Last Name Is Required
+            </small>
+            <small id="fileHelpId" *ngIf="service.fg.get('lastName').errors.minlength || service.fg.get('lastName').errors.maxlength" class="form-text text-danger">
+                The Minimum Length Is 3 And The Maximum Length Is 35
+            </small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="poste">Poste</label>
+        <input type="text" formControlName='poste' id="poste" class="form-control"
+            [ngClass]="{'is-invalid': this.service.fg.get('poste').invalid && this.service.fg.get('poste').touched}">
+        <div *ngIf="service.fg.invalid && service.fg.get('poste').touched">
+            <small id="fileHelpId" *ngIf="service.fg.get('poste').errors.required" class="form-text text-danger">
+                The Poste Is Required
+            </small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="nombre">Nombre</label>
+        <input type="number" formControlName='nombre' id="nombre" class="form-control"
+            [ngClass]="{'is-invalid': this.service.fg.get('nombre').invalid && this.service.fg.get('nombre').touched}">
+        <div *ngIf="service.fg.invalid && service.fg.get('nombre').touched">
+            <small id="fileHelpId" *ngIf="service.fg.get('nombre').errors.required" class="form-text text-danger">
+                The Nombre Players Is Required
+            </small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="nationality">Nationality</label>
+        <input type="text" formControlName='nationality' id="nationality" class="form-control"
+            [ngClass]="{'is-invalid': this.service.fg.get('nationality').invalid && this.service.fg.get('nationality').touched}">
+        <div *ngIf="service.fg.invalid && service.fg.get('nationality').touched">
+            <small id="fileHelpId" *ngIf="service.fg.get('nationality').errors.required" class="form-text text-danger">
+                The Nationality Is Required
+            </small>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="date_Nais">Date</label>
+        <input type="date" formControlName='date_Nais' id="date_Nais" class="form-control">
+    </div>
+    <div class="form-group">
+        <label for="about">About</label>
+       <textarea formControlName="about" name="about" id="about" class="form-control" cols="30" rows="6"
+       [ngClass]="{'is-invalid': this.service.fg.get('about').invalid && this.service.fg.get('about').touched}">
+
+       </textarea>
+       <div *ngIf="service.fg.get('about').invalid && service.fg.get('about').touched">
+        <small id="fileHelpId" *ngIf="service.fg.get('about').errors.required" class="form-text text-danger">
+            About Is Required
+        </small>
+        <small id="fileHelpId" *ngIf="service.fg.get('about').errors.minlength" class="form-text text-danger">
+            The Minimum Length Is 20
+        </small>
+    </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label for="file"></label>
+                <input type="file" class="form-control-file" name="file" id="file" placeholder=""
+                    (change)='uploadFile($event)' accept="image/*" aria-describedby="fileHelpId">
+                <small id="fileHelpId" class="form-text text-muted">Help text</small>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <img src="" id="image" *ngIf="service.player.file !== null" class="img-fluid" alt="">
+            <img *ngIf="service.player.file === null && service.player.image !== ''" src="{{service.player.image}}"
+                class="img-fluid" alt="">
+        </div>
+    </div>
+</form>

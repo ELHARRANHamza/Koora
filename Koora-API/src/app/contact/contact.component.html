@@ -1,0 +1,106 @@
+<section id="contant" class="contant main-heading team">
+    <div class="row">
+       <div class="container">
+          <div class="contact">
+             <div class="col-md-12">
+                <div class="map"> 
+                   <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13402.040699725278!2d-6.919187533573587!3d32.88467708509379!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xda427f741ea7713%3A0x6b7465fcaa4683fa!2sKhouribga!5e0!3m2!1sfr!2sma!4v1610386297458!5m2!1sfr!2sma" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                </div>
+             </div>
+             <div class="col-md-6">
+                <div class="contact-info">
+                   <div class="kode-section-title">
+                      <h3>Contact Info</h3>
+                   </div>
+                   <div class="kode-forminfo">
+                      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam aliquip..</p>
+                      <ul class="kode-form-list">
+                         <li>
+                            <i class="fa fa-home"></i> 
+                            <p><strong>Address:</strong> 20 rue 3 Hay ELFath</p>
+                         </li>
+                         <li>
+                            <i class="fa fa-phone"></i> 
+                            <p><strong>Phone:</strong>  +212 000 790 213</p>
+                         </li>
+                         <li>
+                            <i class="fa fa-envelope-o"></i> 
+                            <p><strong>Email:</strong> harranons@gmail.com</p>
+                         </li>
+                      </ul>
+                   </div>
+                </div>
+             </div>
+             <div class="col-md-6">
+                <div class="contact-us">
+              
+                   <form [formGroup]='fg' class="comments-form" id="contactform">
+                     <ul>
+                        <li>
+                           <div class="form-group">
+                              <input type="text" formControlName="name" id="name" name="name" class="form-control" placeholder="Name *">
+                              <div *ngIf="this.fg.get('name').invalid && this.fg.get('name').touched">
+                                 <small id="fileHelpId" *ngIf="fg.get('name').errors.required" class="form-text text-danger">
+                                    The Name Is Required
+                                 </small>
+                                 <small id="fileHelpId" *ngIf="fg.get('name').errors.minlength || fg.get('name').errors.maxlength"
+                                    class="form-text text-danger">
+                                    The Minimum Length Is 3 And The Maximum Length Is 30
+                                 </small>
+                              </div>
+                           </div>
+                        </li>
+                     
+                        <li>
+                           <div class="form-group">
+                              <input type="text" formControlName='email' name="email" id="email" class="form-control bg-light"
+                                 placeholder="Email *">
+                              <div *ngIf="fg.get('email').invalid && fg.get('email').touched">
+                                 <small id="helpId" class="text-danger" *ngIf="fg.get('email').errors.required">The Email Is Requires
+                                 </small>
+                                 <small *ngIf="this.fg.get('email').errors.email">
+                                    The Format Email Is Wrong
+                                 </small>
+                                 <small id="fileHelpId" *ngIf="fg.get('email').errors.minlength || fg.get('email').errors.maxlength"
+                                    class="form-text text-danger">
+                                    <br>
+                                    The Minimum Length Is 14 And The Maximum Length Is 50
+                                 </small>
+                              </div>
+                           </div>
+                        </li>
+                        <li>
+                           <input type="text" formControlName="address" class="form-control" placeholder="Addresse">
+                        </li>
+                        <li>
+                           <div class="from-group">
+                              <textarea formControlName="message" name="message" id="message"
+                                 placeholder="Write Message*....."></textarea>
+                              <div *ngIf="fg.get('message').invalid && fg.get('message').touched">
+                                 <small *ngIf="fg.get('message').errors.required"
+                                 class="form-text text-danger">
+                                    The Message Is Required
+                                 </small>
+                                 <small *ngIf="fg.get('message').errors.minlength"
+                                 class="form-text text-danger">
+                                    The Minimum Length Is 4
+                                 </small>
+                              </div>
+                           </div>
+                        </li>
+                        <li><button class="btn btn-success btn-block" (click)="sendMessage()" [disabled]="fg.invalid">
+                              send
+                           </button>
+                        </li>
+                     </ul>
+
+                      <div class="hidden-me" id="contact_form_responce">
+                         <p></p>
+                      </div>
+                   </form>
+                </div>
+             </div>
+          </div>
+       </div>
+    </div>
+ </section>
